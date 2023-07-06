@@ -35,6 +35,15 @@ builder.Services.AddAuthentication(authOptions =>
 
 var app = builder.Build();
 
+app.Use(async (context, next) =>
+{
+    context.Request.Scheme = "https";
+
+   
+    await next();
+
+});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
